@@ -88,9 +88,12 @@ nav:
   - Home: index.md
   # - Welcome: welcome.md
   - Lab:
-      - Overview: overview.md
-      - Lab 1 - Getting Started: lab1_getting_started.md
-      - Conclusion: conclusion.md
+      - Objectives: lab-learning-objectives.md
+      - Lab Access: lab-access-2-minutes.md
+  - San Jose: lab-site-1-san-jose-20-30-minutes.md
+  - New York: lab-site-2-new-york-1-hour-15-minutes.md
+  - Dallas: lab-site-3-dallas-20-30-minutes.md
+  - London: lab-site-4-london-30-minutes.md
   - Topologies: topologies.md
   - How to use this guide:
       - Setting up and using the tool:
