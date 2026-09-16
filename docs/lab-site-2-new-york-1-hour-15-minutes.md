@@ -1,10 +1,10 @@
 ## Lab Site 2 – New York [ 1 Hour 15 Minutes]
 
 ### Overview
+!!! info
+      This site is similar to Site 1, aside from that PSTN is accessed through the Cloud Connect For Webex Calling PSTN Type. This sends PSTN calls out through providers that partner with Webex. The site recently moved away from a centralized CUBE for PSTN Access as part of a modernization effort to move to the cloud. The CUBE still exists at this site and centralizes PSTN for other locations that have not moved yet; as well as providing internal calling between the legacy UCM And Webex Calling.
 
-This site is similar to Site 1, aside from that PSTN is accessed through the Cloud Connect For Webex Calling PSTN Type. This sends PSTN calls out through providers that partner with Webex. The site recently moved away from a centralized CUBE for PSTN Access as part of a modernization effort to move to the cloud. The CUBE still exists at this site and centralizes PSTN for other locations that have not moved yet; as well as providing internal calling between the legacy UCM And Webex Calling.
-
-All PSTN connections at this site have been migrated to be delivered via cloud connect PSTN to Webex Calling, however, some users are still yet to be migrated from UCM and are still using Jabber. Calls will flow through Webex Calling, through the CUBE and on to UCM Registered users. We will migrate one such user from UCM Registration to Webex Calling registration during this section. Study the diagram below, and notice there are two PSTN Paths – one terminating at UCM users, one terminating at Webex Users.
+      All PSTN connections at this site have been migrated to be delivered via cloud connect PSTN to Webex Calling, however, some users are still yet to be migrated from UCM and are still using Jabber registered to UCM. Calls will flow through Webex Calling, through the CUBE and on to UCM Registered users. We will migrate one such user from UCM Registration to Webex Calling registration during this section. Study the diagram below, and notice there are two PSTN Paths – one terminating at UCM users, one terminating at Webex Users.  This is a new addition to this lab for Webex One 2026!
 
 ![](assets/docx-image-043.png)
 
@@ -444,9 +444,8 @@ To:<sip:+17206470845@40462196.cisco-bcld.com;user=phone>
 ```
 
 8\. Now find the configuration that looks like this. This command associates the trunk identifier above with this dial peer – so it gets selected as the incoming dial peer when we receive a call from Webex destined for the UCM User as their PSTN connection. At this point, it is is an internal call between systems.   
-!!! important
-      incoming uri request 301
-```
+
+<pre><code>
 dial-peer voice 300 voip
 description WxC Side Internal Dial Peer for UCM<>WxC Flow
 max-conn 250
@@ -454,7 +453,7 @@ destination-pattern BAD.BAD
 session protocol sipv2
 session target sip-server
 destination dpg 301
-incoming uri request 301
+<text style="color:red;">incoming uri request 301</text>
 voice-class codec 99
 voice-class stun-usage 200
 no voice-class sip localhost
@@ -462,7 +461,7 @@ voice-class sip tenant 300
 dtmf-relay rtp-nte
 srtp
 no vad
-```
+</code></pre>
 
 #### Hybrid User Extension Number Overlap
 
@@ -513,8 +512,11 @@ Earlier we configured Kellie to have extension number overlap with a user on Web
 16\. Click **Call Routing > Translation Pattern** and add a new one  
 ![](assets/docx-image-120.png)
 
-17\. Configure it with the following settings. The goal of this translation pattern is to catch any inbound call from the local gateway that has a destination of four digits. We then **Route next hop by calling party number** which will match based on the callers number. The next step is to implement a logic of “If a caller calls four digits from +1-123-456-7890 then they are a member of the New York Site, so translate to 43XXXX. If they call from +1-456-789-1234 they are a member of the San Jose site, so translate to 42XXXX”  
-    Once you have populated the details, click **Save**  
+17\. Configure it with the settings as pictured below.
+!!! curious
+      The goal of this translation pattern is to catch any inbound call from the local gateway that has a destination of four digits. We then **Route next hop by calling party number** which will match based on the callers number. The next step is to implement a logic of “If a caller calls four digits from +1-123-456-7890 then they are a member of the New York Site, so translate to 43XXXX. If they call from +1-456-789-1234 they are a member of the San Jose site, so translate to 42XXXX”  
+Once you have populated the details, click **Save**
+
 ![](assets/docx-image-121.png)
 
 18\. Add another calling search space with the settings as follows. Note that +1720647XXXX is the DID Range for our New York site in this example.  
@@ -523,8 +525,8 @@ Earlier we configured Kellie to have extension number overlap with a user on Web
 19\. Now return to Eric Steele’s Jabber client and dial the 4 digit extension, notice the call is now delivered to Kellie’s Jabber client!
 
 #### Migrate UCM User To Webex Calling
-
-Now lets explore what happens when we want to move the UCM Based user over to Webex Calling.
+!!! info
+      Next, lets step through what happens when we want to move the UCM Based user over to Webex Calling.
 
 1\. It’s a good idea to move a user over to Webex Calling without removing their UCM config, until we can confirm everything is working at least. We want to retain some kind of backout plan. To do this, lets create a partition that hides the users directory number. Open the **Call Routing > Class Of Control > Partition Menu**  
 ![](assets/docx-image-123.png)
@@ -565,7 +567,8 @@ Now lets explore what happens when we want to move the UCM Based user over to We
 
 #### Webex Calling Inter Location Dialing
 
-Now our Webex calling user configuration is mostly complete for this site, lets pause for a moment to see how our internal dial plan is functioning and explore one of the options we have available. Remember, the user accounts use the domain suffix from your dCloud session and the password of dCloudXXXX! Where XXXX is the last four digits of your session ID.
+!!! info
+      Now our Webex calling user configuration is mostly complete for this site, lets pause for a moment to see how our internal dial plan is functioning and explore one of the options we have available. Remember, the user accounts use the domain suffix from your dCloud session and the password of dCloudXXXX! Where XXXX is the last four digits of your session ID.
 
 1\. Ensure Eric Steele is logged into Webex on Workstation 2 now. The username will be [esteele@cbXXX.dc-YY.com](mailto:esteele@cbXXX.dc-YY.com) and the password will be the same as Anita’s; You can get it from the session info file on the desktop. Observe that you can see both his primary line, and the reception line we created earlier on
 
@@ -591,9 +594,12 @@ Now our Webex calling user configuration is mostly complete for this site, lets 
      
 ![](assets/docx-image-140.png)
 
-8\. This is because the setting “allow extension dialing between locations” is enabled by default. This setting controls if a user can dial between sites without a site code, with preference being given to a local site match. This is why Eric got Kellie the first time, because she is within the same site as Eric. Once Kellie’s number changed, we routed to Charles in a different site instead; Even though we didn’t dial the site routing prefix for New York
+!!! curious
+      This is because the setting “allow extension dialing between locations” is enabled by default. This setting controls if a user can dial between sites without a site code, with preference being given to a local site match. This is why Eric got Kellie the first time, because she is within the same site as Eric. Once Kellie’s number changed, we routed to Charles in a different site instead; Even though we didn’t dial the site routing prefix for New York
 
-9\. From control hub, Open the calling menu, and click on the settings tab. Disable the “Allow extension dialling between locations” and save the configuration.  
+8\. From control hub, Open the calling menu, and click on the settings tab.
+
+9\. Disable the “Allow extension dialling between locations” and save the configuration.  
 ![](assets/docx-image-141.png)
 
 10\. Try your call again. This time, the call will not be delivered to Charles Webex client, because we didn’t dial the full 6 digit number including the site code for Charles Holland.
@@ -602,21 +608,22 @@ Now our Webex calling user configuration is mostly complete for this site, lets 
       
 ![](assets/docx-image-142.png)
 
-Imagine a scenario where User A, who is in Site 1, dials the digits 1001 (I.e does not include any site routing code) Let’s explore what User A will experience, in the following configuration scenarios, where we might have extension overlap between sites, and how the settings for allowing extension dialing between sites affects call routing (On = Allow; Off = Disallow). See the [help.webex.com article](https://help.webex.com/en-us/article/pxtu15/Configure-your-Webex-Calling-dial-plan#:~:text=Allow%20extension%20dialing%20between%20locations,extensions%20across%20all%20its%20locations.) for more information. [Configure Webex Calling Dialplan](https://help.webex.com/en-us/article/pxtu15/Configure-your-Webex-Calling-dial-plan)
+!!! info
+      Imagine a scenario where User A, who is in Site 1, dials the digits 1001 (I.e does not include any site routing code) Let’s explore what User A will experience, in the following configuration scenarios, where we might have extension overlap between sites, and how the settings for allowing extension dialing between sites affects call routing (On = Allow; Off = Disallow). See the [help.webex.com article](https://help.webex.com/en-us/article/pxtu15/Configure-your-Webex-Calling-dial-plan#:~:text=Allow%20extension%20dialing%20between%20locations,extensions%20across%20all%20its%20locations.) for more information. [Configure Webex Calling Dialplan](https://help.webex.com/en-us/article/pxtu15/Configure-your-Webex-Calling-dial-plan)
 
-**User A in site 1 dials 1001:**
+      **User A in site 1 dials 1001:**
 
-|  |  |  |  |  |  |
-| --- | --- | --- | --- | --- | --- |
-| No. | User B | User C | User D | Setting | Result |
-| 1 | 1001 in Site 1 | Not Configured | Not Configured | On or Off | A will call B |
-| 2 | 1001 in Site 1 | 1001 in Site 2 | Not Configured | On or Off | A will call B |
-| 3 | Not Configured | 1001 in Site 2 | Not Configured | On | A will call C |
-| 4 | Not Configured | 1001 in Site 2 | Not Configured | Off | The call fails |
-| 5 | Not Configured | 1001 in Site 2 | 1001 in Site 3 | On | A will call C/D |
-| 6 | Not Configured | 1001 in Site 2 | 1001 in Site 3 | Off | The call fails |
+      |  |  |  |  |  |  |
+      | --- | --- | --- | --- | --- | --- |
+      | No. | User B | User C | User D | Setting | Result |
+      | 1 | 1001 in Site 1 | Not Configured | Not Configured | On or Off | A will call B |
+      | 2 | 1001 in Site 1 | 1001 in Site 2 | Not Configured | On or Off | A will call B |
+      | 3 | Not Configured | 1001 in Site 2 | Not Configured | On | A will call C |
+      | 4 | Not Configured | 1001 in Site 2 | Not Configured | Off | The call fails |
+      | 5 | Not Configured | 1001 in Site 2 | 1001 in Site 3 | On | A will call C/D |
+      | 6 | Not Configured | 1001 in Site 2 | 1001 in Site 3 | Off | The call fails |
 
-Note: Scenario 5 will call either User C or User D unpredictably; you should avoid this when possible.
+      Note: Scenario 5 will call either User C or User D unpredictably; you should avoid this when possible.
 
 #### Dial 0 for Webex Calling Reception
 
@@ -661,24 +668,26 @@ Now let’s test our 0 for reception pattern. Dial 0 from Charles Holland on Wor
 
 ##### Webex Calling & PSTN Routing
 
-In UCM, we used to decide which digit patterns were routed to PSTN. In Webex Calling, the [PSTN Dial plan](https://help.webex.com/en-us/article/757iyo/Dial-plans-by-country#United-States) is pre configured for every country we support. We never need to tell Webex calling which calls should go to PSTN, our dial plan handles this automatically and sends calls to the configured PSTN Connection if it is a PSTN Number. This can introduce some intricacies in UCM co-existence scenarios; But don’t worry, we have tools to manage that!
+!!! curious
+      In UCM, we used to decide which digit patterns were routed to PSTN. In Webex Calling, the [PSTN Dial plan](https://help.webex.com/en-us/article/757iyo/Dial-plans-by-country#United-States) is pre configured for every country we support. We never need to tell Webex calling which calls should go to PSTN, our dial plan handles this automatically and sends calls to the configured PSTN Connection if it is a PSTN Number. This can introduce some intricacies in UCM co-existence scenarios; But don’t worry, we have tools to manage that!
 
-We just configured the feature that allows us to set a destination trunk for unknown extension numbers to route to in the case that no other matches are found. The idea of this is that when a Webex Calling MT user dials an unknown number that looks like an extension number, we route it to UCM. See the following decision tree diagram for information on how we decide where to route these calls.
+!!! info
+      We just configured the feature that allows us to set a destination trunk for unknown extension numbers to route to in the case that no other matches are found. The idea of this is that when a Webex Calling MT user dials an unknown number that looks like an extension number, we route it to UCM. See the following decision tree diagram for information on how we decide where to route these calls.
 
-![A diagram of a selection Description automatically generated](assets/docx-image-154.png)
+      ![A diagram of a selection Description automatically generated](assets/docx-image-154.png)
 
-Lets step through the logic in the diagram above, analyzing a scenario where a user on Webex Calling wants to dial a UCM based user over the New York Internal trunk. This UCM based user breaks our 6 digit dial plan and is using a 7 digit extension number of 4416026.
+      Lets step through the logic in the diagram above, analyzing a scenario where a user on Webex Calling wants to dial a UCM based user over the New York Internal trunk. This UCM based user breaks our 6 digit dial plan and is using a 7 digit extension number of 4416026.
 
-* Charles looks up a user in the directory, their extension is 4416026. He dials that user.
-* Webex calling analyses the dialed digits. This is not an Emergency pattern, pass to the next gate.
-* There is no configured translation pattern (TP) match for 4416026, pass to the next gate.
-* The outbound dial digit does not exist, pass to the next gate.
-* There is no internal match configured within Webex Calling, pass to the next gate.
-* NS Lookup finds that 4416026 matches the XXXXXXX Local Calls pattern for North America PSTN Numbering plan, send the call out of PSTN!
+      * Charles looks up a user in the directory, their extension is 4416026. He dials that user.
+      * Webex calling analyses the dialed digits. This is not an Emergency pattern, pass to the next gate.
+      * There is no configured translation pattern (TP) match for 4416026, pass to the next gate.
+      * The outbound dial digit does not exist, pass to the next gate.
+      * There is no internal match configured within Webex Calling, pass to the next gate.
+      * NS Lookup finds that 4416026 matches the XXXXXXX Local Calls pattern for North America PSTN Numbering plan, send the call out of PSTN!
 
-![](assets/docx-image-155.png)
+      ![](assets/docx-image-155.png)
 
-Our goal is to have this route over to the UCM Via the trunk. First, we have to understand our unknown extension number handling logic.
+      Our goal is to have this route over to the UCM Via the trunk. First, we have to understand our unknown extension number handling logic.
 
 ##### Maximum Unknown Extension Length & PSTN Routing
 
@@ -695,15 +704,16 @@ Our goal is to have this route over to the UCM Via the trunk. First, we have to 
 5\. Now change your called number to 4416026, a 7 digit number. Notice now the call still routes to an external number via PSTN! Why isn’t this routing as an unknown extension?  
 ![](assets/docx-image-158.png)
 
-6\. The length of unknown extensions can be anything from 2-10 digits. It is important to set this accurately, since some countries such as the USA have nonspecific PSTN Dial plans that route 7 digits to PSTN, such as XXXXXXX. Using the example of Germany, any number from 5 digits in length, all the way up to 13 digits in length constitutes a valid destination for PSTN routing! So how do we route to internal unknown extension numbers in that scenario? With what we just learned, it would seem that all of our internal users would be pushed to PSTN instead of over the trunk to UCM! See a screenshot of the Germany PSTN dial plan below.  
-     
-![A screenshot of a computer Description automatically generated](assets/docx-image-159.png)
+!!! curious
+      The length of unknown extensions can be anything from 2-10 digits. It is important to set this accurately, since some countries such as the USA have nonspecific PSTN Dial plans that route 7 digits to PSTN, such as XXXXXXX. Using the example of Germany, any number from 5 digits in length, all the way up to 13 digits in length constitutes a valid destination for PSTN routing! So how do we route to internal unknown extension numbers in that scenario? With what we just learned, it would seem that all of our internal users would be pushed to PSTN instead of over the trunk to UCM! See a screenshot of the Germany PSTN dial plan below.  
+         
+      ![A screenshot of a computer Description automatically generated](assets/docx-image-159.png)
 
-7\. In a production environment, we need to mitigate this PSTN/Internal dial plan overlap by enforcing outbound dial digit, and /or setting the maximum valid length for an internal call. Some countries can get by with correctly setting the maximum unknown extension length, others will require outbound dial digit enforcement. It depends what their PSTN dial plan looks like.
+      In a production environment, we need to mitigate this PSTN/Internal dial plan overlap by enforcing outbound dial digit, and /or setting the maximum valid length for an internal call. Some countries can get by with correctly setting the maximum unknown extension length, others will require outbound dial digit enforcement. It depends what their PSTN dial plan looks like.
 
-8\. In our example, we fixed the 8 digit extension problem, but 7 digit numbers are still going out of PSTN because it’s a valid PSTN destination in the USA. Let’s dive into this now!
+      In our example, we fixed the 8 digit extension problem, but 7 digit numbers are still going out of PSTN because it’s a valid PSTN destination in the USA. Let’s dive into this now!
 
-9\. You can check the [country specific dial plan document](https://help.webex.com/en-us/article/757iyo/Dial-plans-by-country) to check for overlaps in real world scenarios. Have a look at the North American numbering plan now and find the 7 digit PSTN pattern we are hitting here
+9\. You can check the [country specific dial plan document](https://help.webex.com/en-us/article/757iyo/Dial-plans-by-country) to check for overlaps in real world scenarios. Open the page, and have a look at the North American numbering plan now and find the 7 digit PSTN pattern we are hitting here
 
 10\. We’re in a good spot for everything except our 7 digit internal routing. How do we fix this? Let’s turn on outbound dial digit enforcement! Open your San Jose location and go to the calling tab then External dialing.  
 ![](assets/docx-image-160.png)
@@ -715,7 +725,7 @@ Our goal is to have this route over to the UCM Via the trunk. First, we have to 
 
 |  |  |  |
 | --- | --- | --- |
-| Dial Digit | Enforcement | Valid PSTN Dial Strings |
+| **Dial Digit** | **Enforcement** | **Valid PSTN Dial Strings** |
 | 9 | Enabled | 9-476-2428 |
 | 9 | Disabled | 9-476-2428  476-2428 |
 
@@ -725,19 +735,20 @@ Our goal is to have this route over to the UCM Via the trunk. First, we have to 
 14\. Check again with a 9 at the front. Note the call goes to PSTN now!  
 ![](assets/docx-image-163.png)
 
-15\. Let’s step through our destination selection scenario again to understand this process.
+!!! info
+      Let’s step through our destination selection scenario again to understand this process.
 
-![A diagram of a selection Description automatically generated](assets/docx-image-164.png)
+      ![A diagram of a selection Description automatically generated](assets/docx-image-164.png)
 
-* Charles looks up a user in the directory, their extension is 4416026. He dials that user.
-* Webex calling analyses the dialed digits. This is not an Emergency pattern, pass to the next gate.
-* There is no configured translation pattern (TP) match for 4416026, pass to the next gate.
-* The outbound dial digit (ODD) does not exist, pass to the next gate.
-* There is no internal match configured within Webex Calling, pass to the next gate.
-* We don’t have outbound dial digit present and enforcement is enabled. Don’t check NS Lookup patterns for PSTN routing, Number is unknown
-* We invoke “route unknown extensions to premises” configuration, and call is pushed over the internal calling trunk to our local gateway connected to UCM.
+      * Charles looks up a user in the directory, their extension is 4416026. He dials that user.
+      * Webex calling analyses the dialed digits. This is not an Emergency pattern, pass to the next gate.
+      * There is no configured translation pattern (TP) match for 4416026, pass to the next gate.
+      * The outbound dial digit (ODD) does not exist, pass to the next gate.
+      * There is no internal match configured within Webex Calling, pass to the next gate.
+      * We don’t have outbound dial digit present and enforcement is enabled. Don’t check NS Lookup patterns for PSTN routing, Number is unknown
+      * We invoke **route unknown extensions to premises** configuration, and call is pushed over the internal calling trunk to our local gateway connected to UCM.
 
-16\. We have now set up our UCM-Webex Calling internal calls trunk. In practice, remember to consider the interactions between maximum unknown extension length, the default PSTN dial plan, and enforce outbound dial digit configurations.
+      We have now set up our UCM-Webex Calling internal calls trunk. In practice, remember to consider the interactions between maximum unknown extension length, the default PSTN dial plan, and enforce outbound dial digit configurations.
 
 ##### Real Test Calls
 
@@ -748,59 +759,62 @@ Our goal is to have this route over to the UCM Via the trunk. First, we have to 
 ![](assets/docx-image-166.png)
 
 3\. Open the local gateway via Putty and log in. Enter the “show run” command and press enter. You should see the configuration – press space 7 or 8 times to scroll down to the area that looks something like the below. The red part will change in your deployment according to your trunk name.  
-     
-   voice class uri 301 sip  
-   pattern dtg=intcal0729693267\_lgu  
+<pre><code>
+voice class uri 301 sip  
+pattern dtg=<text style="color:red;">intcal0729693267_lgu</text>
+</code></pre>
      
 ![](assets/docx-image-167.png)
 
 4\. Now find the configuration that looks like this by pressing space a few more times; Note that the dial peer is selected when the incoming URI matches 301 – Which is the command we just saw that references the internal calls trunk.  
-     
-   dial-peer voice 300 voip
-
+<pre><code>
+dial-peer voice 300 voip
 description WxC Side Internal Dial Peer for UCM<>WxC Flow
-
 max-conn 250
-
 destination-pattern BAD.BAD
-
 session protocol sipv2
-
 session target sip-server
-
 destination dpg 301
-
-incoming uri request 301
-
+<text style="color:red;">incoming uri request 301</text>
 no voice-class sip localhost
-
 voice-class sip tenant 300
-
 dtmf-relay rtp-nte
-
 srtp
-
 no vad
+</code></pre>
 
 5\. Press q to exit out of the configuration display mode. Issue the commands below and press enter after each one  
+```
+debug ccsip messages  
+terminal monitor
+```
+
+6\. Dial 6026 from another users Webex Client. You should see the call arrive on Taylors Jabber client. Take a look on your local gateway for the Received SIP Message – There will be quite a few messages, but you want to see the one that starts with the text that's in bold below. It will be one of the first messages. Note the dtg that matches the voice class we looked at above! Which then matches the incoming uri statement on the dial peer. This is how CUBE identifies the dial peer to receive the call on. If you want to go deeper on this, check the bonus content we will share with you; but we recommend completing the lab fully before you do this due to time constraints. 
+
+!!! info
+      If you find the terminal jumps around before you can find things, issue the command
+      ```
+      terminal no monitor
+      ```
      
-   debug ccsip messages  
-   terminal monitor
+      This will stop the debugs coming in. Remember to turn it on again before the next tests!  
+    
+!!! code
+      <b>
+      
+      ```
+      Received:
+      INVITE sip:6026@198.18.1.227:5070;transport=tls;dtg=intcal0729693267_lgu SIP/2.0
+      ```
+      
+      </b>
+      
+      ```
+      Via:SIP/2.0/TLS 150.253.153.83:8934;branch=z9hG4bKBroadworksSSE.-64.100.12.5V7654-0-100-1675611455-1779276320297-
+      From:"Charles Holland"<sip:426014@150.253.153.83;user=phone>;tag=1675611455-1779276320297-
+      To:<sip:6026@40462196.cisco-bcld.com;user=phone>  
+      ```
 
-6\. Dial 6026 from another users Webex Client. You should see the call arrive on Taylors Jabber client. Take a look on your local gateway for the Received SIP Message – There will be quite a few messages, but you want to see the one that starts with the text highlighted in blue below. It will be one of the first messages. Note the dtg that matches the voice class we looked at above! Which then matches the incoming uri statement on the dial peer. This is how CUBE identifies the dial peer to receive the call on. If you want to go deeper on this, check the bonus content we will share with you; but we recommend completing the lab fully before you do this due to time constraints. **Note: If you find the terminal jumps around before you can find things, issue the command:**terminal no monitor  
-     
-   This will stop the debugs coming in. Remember to turn it on again before the next tests!  
-     
-   **Received:**
-
-**INVITE** sip:6026@198.18.1.227:5070;transport=tls;dtg=intcal0729693267\_lgu SIP/2.0
-
-Via:SIP/2.0/TLS 150.253.153.83:8934;branch=z9hG4bKBroadworksSSE.-64.100.12.5V7654-0-100-1675611455-1779276320297-
-
-From:"Charles Holland"<sip:426014@150.253.153.83;user=phone>;tag=1675611455-1779276320297-
-
-To:<sip:6026@40462196.cisco-bcld.com;user=phone>  
-  
 ![](assets/docx-image-168.png)
 
 7\. Let’s test in the other direction. Open Chrome on the desktop of workstation 1, and open the UCM from the Collaboration Admin Links section. The username is administrator and the password is dCloud123!
@@ -808,51 +822,72 @@ To:<sip:6026@40462196.cisco-bcld.com;user=phone>
 8\. Go to Call Routing, Route/Hunt and then Route Pattern.  
 ![](assets/docx-image-169.png)
 
-9\. Add a New one as follows. We want to ensure numbers are passed to Webex Calling in +E.164 format at all times. Note that in a real deployment, you would use less specific patterns to match entire groups of users. **You must switch out the relevant route pattern and called party transform mask to match your own deployment here, otherwise calls will fail. You can get Charles +E.164 by clicking the avatar on his Webex Client**
+9\. Add a New one as follows. We want to ensure numbers are passed to Webex Calling in +E.164 format at all times. Note that in a real deployment, you would use less specific patterns to match entire groups of users. 
+!!! important
+      You must switch out the relevant route pattern and called party transform mask to match your own deployment here, otherwise calls will fail. You can get Charles +E.164 by clicking the avatar on his Webex Client
 
 |  |  |
 | --- | --- |
-| Route Pattern | Charles Hollands DN E.g 3304 |
-| Route Partition | Base PT |
-| Gateway/Route List | LGW\_RL |
-| Called Party Transform Mask | Charles Holland’s +E.164, E.g +1209821XXXX |
+| **Route Pattern** | Charles Hollands DN E.g 3304 |
+| **Route Partition** | Base PT |
+| **Gateway/Route List** | LGW_RL |
+| **Called Party Transform Mask** | Charles Holland’s +E.164, E.g +1209821XXXX |
 
 10\. Go back to your gateway and use the show run command to find and observe the following configuration. It’s a few lines down from the big list of IPv4 statements. This is a regular expression that matches anything in the range of 198.18.133.X subnet using port 5065.  
-     
-   voice class uri 101 sip
 
+```
+voice class uri 101 sip
 pattern 198\.18\.133\..\*:5065
+```
 
 11\. Press q to exit out of the configuration display mode. Issue the commands below and press enter after each one  
-     
-   debug ccsip messages  
-   terminal monitor
+```
+debug ccsip messages  
+terminal monitor
+```
 
 12\. Now make a call from Taylor Bard’s jabber client to the 4 digit number you just configured for the Route pattern
 
-13\. Check your local gateway again and find the first invite for this call. Note the highlighted part that shows the port of 5065; This is how cube identifies the call is incoming from UCM according to voice class uri 101 above. **Note: If you find the terminal jumps around before you can find things, issue the command:**terminal no monitor  
-     
-   This will stop the debugs coming in. Remember to turn it on again before the next tests!  
-     
-   **Received:**
+13\. Check your local gateway again and find the first invite for this call. Note the part in bold that shows the port of 5065; This is how cube identifies the call is incoming from UCM according to voice class uri 101 above. 
+!!! info
+      If you find the terminal jumps around before you can find things, issue the command
+      ```
+      terminal no monitor
+      ```
+   
+      This will stop the debugs coming in. Remember to turn it on again before the next tests!  
 
-**INVITE** sip:+12792386014@198.18.133.227:5060 SIP/2.0
-
-Via: SIP/2.0/TCP 198.18.133.4:5065;branch=z9hG4bK178576b2d95
-
-From: "Taylor Bard" <sip:6026@198.18.133.4>;tag=6051~166e7111-890f-42b6-afa8-1bcd50aa0a1e-19692354
-
-To: <sip:+12792386014@198.18.133.227>  
+!!! code
+      ```
+      Received:
+      INVITE sip:+12792386014@198.18.133.227:5060 SIP/2.0
+      ```
+      <b>
+      
+      ```
+      Via: SIP/2.0/TCP 198.18.133.4:5065;branch=z9hG4bK178576b2d95
+      ```
+      
+      </b>
+      ```
+      From: "Taylor Bard" <sip:6026@198.18.133.4>;tag=6051~166e7111-890f-42b6-afa8-1bcd50aa0a1e-19692354
+      To: <sip:+12792386014@198.18.133.227>  
+      ```
   
 ![](assets/docx-image-170.png)
 
-14\. In a real deployment, you would also configure extra route patterns for 6 digit and +E.164 routing on UCM, but this is a Webex Calling lab - so in the interests of time we will not do this in this lab.
+!!! info
+      In a real deployment, you would also configure extra route patterns for 6 digit and +E.164 routing on UCM, but this is a Webex Calling lab - so in the interests of time we will not do this in this lab.
 
 ##### Webex Calling To UCM E.164 Call Routing
 
-Unknown extension length routing and outbound dial digit enforcement does not cater for on net E.164 routing. For this, we must use dial plans. Note that dial plans are Organization wide in scope, so anything you add as a routing trunk target will be set as such for every user in the MT org. Unknown extension number routing, however, is site specific. **Do not use dial plans for real PSTN Routing! It is only for on-net destinations.**
+!!! curious
+      Unknown extension length routing and outbound dial digit enforcement does not cater for on net E.164 routing. For this, we must use dial plans. Note that dial plans are Organization wide in scope, so anything you add as a routing trunk target will be set as such for every user in the MT org. Unknown extension number routing, however, is site specific. 
 
-Let’s imagine our customer owns the PSTN DDI Range +1294321602X and it is currently servicing users on UCM. The internal extension range of 602X is catered for already by our “unknown extension number” routing settings. However, the +E.164 patterns will currently route to PSTN, because they are valid patterns! Let’s test this out now.
+!!! important
+      Do not use dial plans for real PSTN Routing! It is only for on-net destinations and will cause catastrophic call routing failures if used improperly!
+!!! info
+      Let’s imagine our customer owns the PSTN DDI Range **+1294321602X** and it is currently servicing users on UCM. The internal extension range of 602X is catered for already by our **unknown extension number** routing settings. However, the +E.164 patterns will currently route to PSTN, because they are valid patterns! Let’s test this out now.
 
 1\. Open control hub, Select PSTN & Routing, Gateway Configurations and choose Verify call routing. Enter a source user of Kellie Melby, and a destination of Taylor Bard on their full +E.164 DDI +12943216026. Observe that this call actually goes out of the PSTN connection!  
 ![](assets/docx-image-171.png)
