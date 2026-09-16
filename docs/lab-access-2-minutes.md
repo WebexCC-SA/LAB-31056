@@ -1,22 +1,27 @@
 ## Lab Access [2 Minutes]
 
-1. Open a browser on your laptop and go to <https://dcloud.cisco.com>
-2. Click **Login** at the top right corner and log in with your Cisco.com credentials.
-3. Once logged in, open a new browser tab and paste the **event URL** for your lab. The **event URL** is:  
-   <https://dcloud2-sjc.cisco.com/event/398829/access>
-4. You will be automatically assigned to a lab pod, and you will be taken to the Lab topology page as shown below.
+1\. Open a browser on your laptop and go to <https://dcloud.cisco.com>
+
+2\. Click **Login** at the top right corner and log in with your Cisco.com credentials.
+
+3\. Once logged in, open a new browser tab and paste the **event URL** for your lab. The **event URL** is:
+<https://dcloud2-sjc.cisco.com/event/398829/access>
+
+4\. You will be automatically assigned to a lab pod, and you will be taken to the Lab topology page as shown below.
 
 ![](assets/docx-image-002.png)
 
-1. Click on the **User Workstation 1** icon on the topology page and it will bring up a fly-out window on left side. Go to Remote Access and you will **Workstation 1** related information like **IP Address**, **username,** and **password** as shown below.
+5\. Click on the **User Workstation 1** icon on the topology page and it will bring up a fly-out window on left side. Go to Remote Access and you will **Workstation 1** related information like **IP Address**, **username,** and **password** as shown below.
 
 **![](assets/docx-image-003.png)**
 
-1. Similarly, you can click on any other Virtual Machine on the topology page to get its respective details.
-2. In this lab, for each module, you will access respective **Workstation** (through **WebRDP or Remote Desktop**) and from that **Workstation** you will be able to access all the UC applications like, Webex Control Hub, Cisco UCM and CUBE etc. to complete the module tasks.
-3. There are **two** ways you can access **Workstation 1**. You can either connect via a **local RDP connection** or via a **WebRDP connection** from your classroom laptop.
+6\. Similarly, you can click on any other Virtual Machine on the topology page to get its respective details.
 
-**Option (A)**
+7\. In this lab, for each module, you will access respective **Workstation** (through **WebRDP or Remote Desktop**) and from that **Workstation** you will be able to access all the UC applications like, Webex Control Hub, Cisco UCM and CUBE etc. to complete the module tasks.
+
+8\. There are **two** ways you can access **Workstation 1**. You can either connect via a **local RDP connection** or via a **WebRDP connection** from your classroom laptop.
+
+### Option (A)
 
 To connect to the Workstation using your **local RDP connection**, first, you need to connect to your lab session via **VPN**. Open **Cisco Secure Client app** on your laptop. It will prompt you for the **Host Address**, **username,** and **password** information for your session. You will find all these details under the **Info** > **Cisco Secure Client** section of your lab. Enter all the details as shown below and click **OK** to connect to your session. The **Host Address**, **username,** and **password** will be different for each lab. Use **YOUR OWN** assigned lab details.
 
@@ -30,19 +35,17 @@ Username: **dcloud\cholland**
 
 Password: **dCloud123!**
 
-**Option (B)**
+### Option (B)
 
 To access Workstation 1 over **WebRDP**, click on the **Workstation 1** icon on the topology page and when it brings up a fly-out window with workstation details. On the fly-out window go to click on the **Remote Access > Web RDP**. It will open a new browser tab and connect you to Workstation 1.
 
-![A screenshot of a computer
+![A screenshot of a computer AI-generated content may be incorrect.](assets/docx-image-005.png)
 
-AI-generated content may be incorrect.](assets/docx-image-005.png)
-
-1. Once you are connected to Workstation 1, go to your dCloud lab topology page, click on the **Info** tab, and a fly-out window will open on the left side. Here you will find all your lab-related information like the **Session ID**, **VPN** connection details, **DNS Domain,** etc., You will need all this information throughout this lab.
+9\. Once you are connected to Workstation 1, go to your dCloud lab topology page, click on the **Info** tab, and a fly-out window will open on the left side. Here you will find all your lab-related information like the **Session ID**, **VPN** connection details, **DNS Domain,** etc., You will need all this information throughout this lab.
 
 ![](assets/docx-image-006.png)
 
-1. For this lab all this information is compiled and put on ***ALL*** the workstations in a file named Session\_Info.txt. You will use this information throughout the lab from respective workstation of each module.
+10\. For this lab all this information is compiled and put on ***ALL*** the workstations in a file named Session\_Info.txt. You will use this information throughout the lab from respective workstation of each module.
 
 ![](assets/docx-image-007.png)
 
