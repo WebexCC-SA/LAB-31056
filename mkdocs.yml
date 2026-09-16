@@ -87,23 +87,13 @@ markdown_extensions:
 nav:
   - Home: index.md
   # - Welcome: welcome.md
-  - Lab:
-      - Objectives: lab-learning-objectives.md
-      - Lab Access: lab-access-2-minutes.md
+  - Lab Preamble:
+      - Mock Scenario: lab-learning-objectives.md
+      - Accessing Your Lab: lab-access-2-minutes.md
   - San Jose: lab-site-1-san-jose-20-30-minutes.md
   - New York: lab-site-2-new-york-1-hour-15-minutes.md
   - Dallas: lab-site-3-dallas-20-30-minutes.md
   - London: lab-site-4-london-30-minutes.md
-  - Topologies: topologies.md
-  - How to use this guide:
-      - Setting up and using the tool:
-        - Initial Setup: howToUse/initialSetup.md
-        - Using the tool after the initial setup: howToUse/postInitial.md
-        - Publishing your changes: howToUse/syncChanges.md
-      - Useful Tools and Resources: howToUse/usefulTools.md
-      - Importing from Word (docx): howToUse/importingFromWord.md
-      - Styling and Advanced Features:
-        - Custom Features: howToUse/customFeatures.md
-        - Custom Admonitions: howToUse/admonition.md
-      - Looking for Inspiration: howToUse/previousEventLabs.md
-      - Before the Event: howToUse/beforeTheEvent.md
+  - Lab Survey: slido.md
+  - Bonus Content:
+    - Debug Local Gateway: lab-debug-calls-through-local-gateway.md

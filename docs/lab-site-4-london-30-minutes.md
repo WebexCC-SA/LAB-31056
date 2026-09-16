@@ -330,5 +330,10 @@ terminal monitor
 # Finish Line!
 This concludes the lab activity! We know this was a tough lab with new concepts, so congratulations for reaching the end! This is a brand new session and we would like to improve and repeat it at future events – so please remember to rate the session positively if you enjoyed it; and feel free to give us feedback directly if you have suggestions.
 
+Please fill out the [Slido Survey](https://app.sli.do/event/trxC42w1Spky4SGGo54Fth) to rate the session! It really helps us to plan events and improve our content.  You can also scan the QR code below with your mobile device to fill out the survey on the go!
+
+
+![alt text](assets/image-1.png)
+
 !!! challenge
       If you still have time, try out the bonus content for extra learning!

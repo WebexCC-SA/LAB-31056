@@ -1,12 +1,12 @@
-## Lab Site 1 – San Jose [20-30 Minutes]
+# Lab Site 1 – San Jose [20-30 Minutes]
 
-### Overview
+## Overview
 !!! info
       This site represents your typical branch site with a cookie cutter requirement. Users with phones and Webex apps, that need access to PSTN via Cisco Calling Plans PSTN. The customer has variable length dial plan, and requires the users within this site to be able to dial each other using a 4 & 5 digit short dial, dialing the full PSTN number without country code, or using the full +E.164 number. Other users at other sites should be dialable using their 6 digit extensions. They also request to be able to dial 0 to reach a reception desk that is located at New York. The customer also has a requirement to route all calls to unknown extension numbers as internal calls over to a Unified Communications Manager based trunk to premises registered users. The reception desk and internal trunk will be configured later during the New York exercise.
 
    ![](assets/docx-image-008.png)
 
-### Configuration Steps
+## Configuration Steps
 
 1\. Open RDP connection to Workstation 1 at 198.18.1.36., using **option (A)** or **option (B)** as described above. If needed, Workstation 1 credentials are **dcloud\cholland** and **dCloud123!**
 
@@ -87,7 +87,7 @@ NOTE: Make sure you replace XXX and YY values from Session\_Info.txt file on Wor
 
 ![](assets/docx-image-020.png)
 
-#### Assign Main Number
+### Assign Main Number
 
 Now, we must assign a main number to the location. Without this set, Webex Calling will not allow any outgoing calls.
 
@@ -101,7 +101,7 @@ Now, we must assign a main number to the location. Without this set, Webex Calli
 
 ![](assets/docx-image-022.png)
 
-#### Assign numbers to users
+### Assign numbers to users
 
 For this site, our telephony users will be **Charles Holland** and **Anita Perez**. We must assign them the +E.164 numbers we just ordered. Remember to give Charles a ***four*** digit extension, and Anita a ***five*** digit extension!
 
@@ -127,7 +127,7 @@ For this site, our telephony users will be **Charles Holland** and **Anita Perez
 
 ![](assets/docx-image-027.png)
 
-### Test Calls
+## Test Calls
 
 Now let’s do some initial test calls to validate the existing dial plan before we start modifying things for the customer requirements.
 
@@ -158,7 +158,7 @@ Now let’s do some initial test calls to validate the existing dial plan before
 6\. Next, try dialing the short dial extensions you configured; we configured 4 digit extension for Charles and 5 digit extension for Anita. So, if you need to dial Anita from Charles Webex dial ***5 digit*** extension (in this example: 95750). If you want to dial Charles from Anita workstation dial ***4 digit*** extension (in this example:5746). These represent your user short code dialing within locations. Hangup the call after few seconds. If you need to get the extension numbers, you can find them within Webex on the Calling tab.  
    ![](assets/docx-image-032.png)
 
-### Configure Base Dial Plan Properties
+## Configure Base Dial Plan Properties
 
 The customer has given us a “site routing code” of 42 for this site, meaning that users should be reachable using a dial string of 42 + User Extension (In the examples in the screenshots, 42 + 5746 or 42 + 95750 – your extension numbers will be different!) If you try dialing these extension numbers now prefixed by 42, you will notice the call fails, since we didn’t configure site routing codes yet
 
@@ -205,7 +205,7 @@ This configures a dial plan for user extensions of 4YXXXX where 4Y is the site c
 
 ![](assets/docx-image-039.png)
 
-### Test Revised Dial Plan
+## Test Revised Dial Plan
 
 1\. From control hub, open PSTN & Routing, Numbers tab, and take a note of the 6 and 7 digit extension numbers there for Charles and Anita  
 ![](assets/docx-image-040.png)

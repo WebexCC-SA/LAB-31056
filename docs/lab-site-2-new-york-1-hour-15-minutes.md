@@ -1,6 +1,6 @@
-## Lab Site 2 – New York [ 1 Hour 15 Minutes]
+# Lab Site 2 – New York [ 1 Hour 15 Minutes]
 
-### Overview
+## Overview
 !!! info
       This site is similar to Site 1, aside from that PSTN is accessed through the Cloud Connect For Webex Calling PSTN Type. This sends PSTN calls out through providers that partner with Webex. The site recently moved away from a centralized CUBE for PSTN Access as part of a modernization effort to move to the cloud. The CUBE still exists at this site and centralizes PSTN for other locations that have not moved yet; as well as providing internal calling between the legacy UCM And Webex Calling.
 
@@ -32,7 +32,7 @@ These are the main differences between the two models.
 
 For more details refer here <https://help.webex.com/en-us/article/t9xctu/Get-started-with-Local-Gateway#local-gateway-trunking-models>
 
-### Configuration Steps
+## Configuration Steps
 
 1\. Continuing on Workstation 1, Webex Control Hub, go to **MANAGEMENT** > **Locations.** On the locations page you will see some pre-created locations. Select the location **New York**.
 
@@ -73,7 +73,7 @@ For more details refer here <https://help.webex.com/en-us/article/t9xctu/Get-sta
 
 ![](assets/docx-image-052.png)
 
-#### Assign Main Number
+### Assign Main Number
 
 Now, we must assign a main number to the location. Without this set, Webex Calling will not allow any outgoing calls.
 
@@ -87,11 +87,11 @@ Now, we must assign a main number to the location. Without this set, Webex Calli
 
 ![](assets/docx-image-054.png)
 
-#### Configure Internal Calling Trunk
+### Configure Internal Calling Trunk
 
 The customer wishes that users are also able to dial back to an on premise UCM using 4-digit short dials and +E.164 numbers. This will be served using the CUBE that is physically located at this New York site. We created some automation for this lab to speed up the configuration process.
 
-##### Webex Calling Config
+#### Webex Calling Config
 
 1\. Continuing on workstation1, minimize all applications. Find the PowerShell script named ***LTRCOL2006\_dp\_add\_internal\_trunk.ps1*** . Right click on the file and choose **Run with PowerShell**.
 
@@ -131,7 +131,7 @@ show sip-ua register status
      
 ![](assets/docx-image-059.png)
 
-##### Add Internal Trunk To Route Group
+#### Add Internal Trunk To Route Group
 
 !!! curious
       We always recommend assigning a Route Group to a Location instead of a trunk directly. This is because when you assign a Route Group to a Location, and you need to add more trunks there will be no impact on the service. Our script we ran earlier created our trunk, now we just have to add it to a route group.
@@ -151,7 +151,7 @@ This completes the Webex Calling side config of the trunk for internal calls.
 !!! curious
       Note that we used DPG matching in our scripts here, but we do not use DPG Matching on dial peers with Webex Calling Survivability active. Bear this in mind if configuring for your customers! Check the [configuration guide](https://help.webex.com/en-us/article/w0qmeu/Colocation-of-Local-Gateway-and-Site-Survivability-on-Cisco-IOS-Managed-Gateways) for more information.
 
-##### UCM Config
+#### UCM Config
 
 Now we must check the trunk on Cisco UCM side to route calls between our on premise solution and Webex Calling solution. This trunk on Cisco UCM is already created for you to save time, but we will observe the important settings.
 
@@ -172,12 +172,12 @@ Now we must check the trunk on Cisco UCM side to route calls between our on prem
 
 ![](assets/docx-image-065.png)
 
-#### Assign numbers to users
+### Assign numbers to users
 
 !!! Info
       For this site, our telephony users will be **Kellie Melby** and **Eric Steele**. We must assign them the +E.164 numbers we just ordered. Eric will represent a user that has been fully migrated to Webex Calling after the switch over to cloud connected PSTN. Kellie will represent a user that has been migrated to Cloud Connected PSTN, but has not been moved off of UCM Just yet.
 
-##### Webex Calling Configuration
+#### Webex Calling Configuration
 
 1\. Continuing on Workstation 1, Webex Control Hub. Navigate to **MANAGEMENT > Users.** On Users page, choose user **Eric Steele**.
 
@@ -199,7 +199,7 @@ Now we must check the trunk on Cisco UCM side to route calls between our on prem
 
 ![](assets/docx-image-069.png)
 
-##### UCM User Configuration
+#### UCM User Configuration
 
 !!! info
       Our second user, Kellie Melby will initially reside on UCM as a Jabber user. The scenario here is that the PSTN has been ported from an on site E1/T1 connection to a cloud connected PSTN provider as the first step. PSTN is trunked through Webex Calling and on to UCM via the local gateway internal calls trunk. Users are then moved over gradually from UCM To Webex Calling.
@@ -313,7 +313,7 @@ P_CloudPSTN, Partition for Cloud PSTN Calls
 27\. You will be presented with a screen to add PSTN DID’s to the route list. Select the one that you have available – This tells Webex Calling to send this number over the trunk to UCM. You can add up to 100 numbers at a time manually, and it is also possible to add them in bulk via CSV. **Add your number and click Add**  
 ![](assets/docx-image-096.png)
 
-#### Configure Site Routing Prefix
+### Configure Site Routing Prefix
 
 1\. Continuing on Workstation 1, Webex Control Hub. Let's define the **Routing Prefix** for **New York** location. On **Webex Control Hub** go to **MANAGEMENT** > **Locations**.
 
@@ -325,7 +325,7 @@ P_CloudPSTN, Partition for Cloud PSTN Calls
 
 ![](assets/docx-image-098.png)
 
-#### Configure Reception Virtual Line
+### Configure Reception Virtual Line
 
 !!! info
       The New York site has a physical reception that will be serviced by **Eric Steele**. However, the PSTN Number itself is taken from the **San Jose** site, as the reception used to be based there until some reorganization took place a few months ago. Let’s go ahead and create the new virtual line and assign it to Eric.
@@ -354,7 +354,7 @@ P_CloudPSTN, Partition for Cloud PSTN Calls
 
 ![](assets/docx-image-102.png)
 
-#### 0 For Local Reception
+### 0 For Local Reception
 
 !!! info
       Users wish to be able to dial 0 for a local reception desk. Let’s configure that now using a translation pattern.
@@ -371,9 +371,9 @@ P_CloudPSTN, Partition for Cloud PSTN Calls
 
 ![](assets/docx-image-104.png)
 
-### Test Calls
+## Test Calls
 
-#### Hybrid PSTN Calls
+### Hybrid PSTN Calls
 
 First, lets test the calls to and from our UCM User using Hybrid PSTN and see this working.
 
@@ -463,7 +463,7 @@ srtp
 no vad
 </code></pre>
 
-#### Hybrid User Extension Number Overlap
+### Hybrid User Extension Number Overlap
 
 Earlier we configured Kellie to have extension number overlap with a user on Webex Calling. Lets take some time to look at how this affects users at different sites.
 
@@ -524,7 +524,7 @@ Once you have populated the details, click **Save**
 
 19\. Now return to Eric Steele’s Jabber client and dial the 4 digit extension, notice the call is now delivered to Kellie’s Jabber client!
 
-#### Migrate UCM User To Webex Calling
+### Migrate UCM User To Webex Calling
 !!! info
       Next, lets step through what happens when we want to move the UCM Based user over to Webex Calling.
 
@@ -565,7 +565,7 @@ Once you have populated the details, click **Save**
 12\. Open Control Hub and Go to **Calling > Settings** and re-enable **Allow Extension Dialling Between Locations** – We are returning this parameter to the default setting before testing further.
 ![](assets/docx-image-134.png)
 
-#### Webex Calling Inter Location Dialing
+### Webex Calling Inter Location Dialing
 
 !!! info
       Now our Webex calling user configuration is mostly complete for this site, lets pause for a moment to see how our internal dial plan is functioning and explore one of the options we have available. Remember, the user accounts use the domain suffix from your dCloud session and the password of dCloudXXXX! Where XXXX is the last four digits of your session ID.
@@ -625,15 +625,15 @@ Once you have populated the details, click **Save**
 
       Note: Scenario 5 will call either User C or User D unpredictably; you should avoid this when possible.
 
-#### Dial 0 for Webex Calling Reception
+### Dial 0 for Webex Calling Reception
 
 Now let’s test our 0 for reception pattern. Dial 0 from Charles Holland on Workstation 1 and note the call gets delivered to Eric Steeles Webex client. Take a deep breath, this is the only test scenario in this entire lab with a single step!
 
 ![](assets/docx-image-143.png)
 
-#### Inter Webex Calling & UCM Calls
+### Inter Webex Calling & UCM Calls
 
-##### Unknown Extension Trunk
+#### Unknown Extension Trunk
 
 1\. Now we want to test internal calls between Webex Calling and UCM Users. Since we already did some real world testing, let’s leverage a tool we have to inspect our call routing – similar to dialled number analyzer. From Control Hub, go to **PSTN & Routing >Gateway Configurations > Verify Call Routing**  
      
@@ -666,7 +666,7 @@ Now let’s test our 0 for reception pattern. Dial 0 from Charles Holland on Wor
 10\. Now repeat this again for an 8 digit number, 44116026. Notice the call is rejected! 8 digit numbers like this are not valid PSTN destinations in the USA dial plan, so Webex Calling does not know how to handle this call. We will explore this in the Maximum Unknown Extension Length Section.  
 ![](assets/docx-image-153.png)
 
-##### Webex Calling & PSTN Routing
+#### Webex Calling & PSTN Routing
 
 !!! curious
       In UCM, we used to decide which digit patterns were routed to PSTN. In Webex Calling, the [PSTN Dial plan](https://help.webex.com/en-us/article/757iyo/Dial-plans-by-country#United-States) is pre configured for every country we support. We never need to tell Webex calling which calls should go to PSTN, our dial plan handles this automatically and sends calls to the configured PSTN Connection if it is a PSTN Number. This can introduce some intricacies in UCM co-existence scenarios; But don’t worry, we have tools to manage that!
@@ -689,7 +689,7 @@ Now let’s test our 0 for reception pattern. Dial 0 from Charles Holland on Wor
 
       Our goal is to have this route over to the UCM Via the trunk. First, we have to understand our unknown extension number handling logic.
 
-##### Maximum Unknown Extension Length & PSTN Routing
+#### Maximum Unknown Extension Length & PSTN Routing
 
 1\. Let’s imagine for a second that we have some UCM Based users that have 8 digit extension numbers. We just used verify call routing for a number 44116026 and noticed that this call was rejected.
 
@@ -750,7 +750,7 @@ Now let’s test our 0 for reception pattern. Dial 0 from Charles Holland on Wor
 
       We have now set up our UCM-Webex Calling internal calls trunk. In practice, remember to consider the interactions between maximum unknown extension length, the default PSTN dial plan, and enforce outbound dial digit configurations.
 
-##### Real Test Calls
+#### Real Test Calls
 
 1\. Leave Webex open as Charles Holland, and Open Jabber on Workstation 1. Login as Taylor Bard, [tbard@cbxxx.dc-xx.com](mailto:tbard@cbxxx.dc-xx.com) (Remember to swap out your specific domain suffix)  
 ![](assets/docx-image-165.png)
@@ -879,7 +879,7 @@ terminal monitor
 !!! info
       In a real deployment, you would also configure extra route patterns for 6 digit and +E.164 routing on UCM, but this is a Webex Calling lab - so in the interests of time we will not do this in this lab.
 
-##### Webex Calling To UCM E.164 Call Routing
+#### Webex Calling To UCM E.164 Call Routing
 
 !!! curious
       Unknown extension length routing and outbound dial digit enforcement does not cater for on net E.164 routing. For this, we must use dial plans. Note that dial plans are Organization wide in scope, so anything you add as a routing trunk target will be set as such for every user in the MT org. Unknown extension number routing, however, is site specific. 

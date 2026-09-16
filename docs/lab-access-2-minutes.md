@@ -1,11 +1,11 @@
-## Lab Access [2 Minutes]
-
+# Lab Access [2 Minutes]
+## Getting Started
 1\. Open a browser on your laptop and go to <https://dcloud.cisco.com>
 
 2\. Click **Login** at the top right corner and log in with your Cisco.com credentials.
 
 3\. Once logged in, open a new browser tab and paste the **event URL** for your lab. The **event URL** is:
-<https://dcloud2-sjc.cisco.com/event/398829/access>
+TO BE CONFIRMED
 
 4\. You will be automatically assigned to a lab pod, and you will be taken to the Lab topology page as shown below.
 
@@ -21,7 +21,7 @@
 
 8\. There are **two** ways you can access **Workstation 1**. You can either connect via a **local RDP connection** or via a **WebRDP connection** from your classroom laptop.
 
-### Option (A)
+## Access Option (A)
 
 To connect to the Workstation using your **local RDP connection**, first, you need to connect to your lab session via **VPN**. Open **Cisco Secure Client app** on your laptop. It will prompt you for the **Host Address**, **username,** and **password** information for your session. You will find all these details under the **Info** > **Cisco Secure Client** section of your lab. Enter all the details as shown below and click **OK** to connect to your session. The **Host Address**, **username,** and **password** will be different for each lab. Use **YOUR OWN** assigned lab details.
 
@@ -35,7 +35,7 @@ Username: **dcloud\cholland**
 
 Password: **dCloud123!**
 
-### Option (B)
+## Access Option (B)
 
 To access Workstation 1 over **WebRDP**, click on the **Workstation 1** icon on the topology page and when it brings up a fly-out window with workstation details. On the fly-out window go to click on the **Remote Access > Web RDP**. It will open a new browser tab and connect you to Workstation 1.
 
@@ -49,4 +49,4 @@ To access Workstation 1 over **WebRDP**, click on the **Workstation 1** icon on 
 
 ![](assets/docx-image-007.png)
 
-**Now you can proceed with the lab!**
+**Now you can proceed with the lab!  Click the San Jose heading to start the first site**
