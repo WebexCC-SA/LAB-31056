@@ -30,4 +30,5 @@ We will be configuring four sites as part of this lab, as detailed in the below 
 | Dallas | USA | Local GW @ NY | 45 |
 | London | EMEA | Local GW @ NY | 44 |
 
-![](assets/image.png)
+
+![](assets/image-3.png)
