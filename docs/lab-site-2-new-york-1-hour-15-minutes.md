@@ -250,8 +250,8 @@ Now we must check the trunk on Cisco UCM side to route calls between our on prem
 8\. Change all fields on the page that specify Taylor Bard to read Kellie Melby, and save the config.  
 ![](assets/docx-image-077.png)
 
-9\. Next, add click the “**Add** **Enterprise Alternate Number**” button and use a number mask of 42**XXXX** – Where XXXX is the last four digits of **Charles Hollands number.** We are configuring a simulated extension number overlap here between a UCM User and a Webex Calling user, which we will test later. Remember to set your Route Partition too!  
-![](assets/docx-image-078.png)
+9\. Next, add click the “**Add** **Enterprise Alternate Number**” button and use a number mask of 43**XXXX** – Where XXXX is the last four digits of **Charles Hollands number.** We are configuring a simulated extension number overlap here between a UCM User and a Webex Calling user, which we will test later. Remember to set your Route Partition too!  
+![](assets/image-2.png)
 
 10\. Now select User Management > End user.  
 ![](assets/docx-image-079.png)
