@@ -522,7 +522,7 @@ Once you have populated the details, click **Save**
 18\. Add another calling search space with the settings as follows. Note that +1720647XXXX is the DID Range for our New York site in this example.  
 ![](assets/docx-image-122.png)
 
-19\. Now return to Eric Steele’s Jabber client and dial the 4 digit extension, notice the call is now delivered to Kellie’s Jabber client!
+19\. Now return to Eric Steele’s Webex client and dial the 4 digit extension, notice the call is now delivered to Kellie’s Jabber client!
 
 ### Migrate UCM User To Webex Calling
 !!! info
