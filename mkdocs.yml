@@ -89,7 +89,7 @@ nav:
   # - Welcome: welcome.md
   - Lab Preamble:
       - Mock Scenario: lab-learning-objectives.md
-      - Accessing Your Lab: lab-access-2-minutes.md
+  - Accessing Your Lab: lab-access-2-minutes.md
   - San Jose: lab-site-1-san-jose-20-30-minutes.md
   - New York: lab-site-2-new-york-1-hour-15-minutes.md
   - Dallas: lab-site-3-dallas-20-30-minutes.md
