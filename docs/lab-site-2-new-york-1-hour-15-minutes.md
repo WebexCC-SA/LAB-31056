@@ -562,7 +562,7 @@ Once you have populated the details, click **Save**
 11\. Next, assign the only free number from the New York location – And remember **Give Kellie the same 4 digit directory number as Charles Holland!** Then click **Save**
 ![](assets/docx-image-133.png)
 
-12\. Open Control Hub and Go to **Calling > Settings** and re-enable **Allow Extension Dialling Between Locations** – We are returning this parameter to the default setting before testing further.
+12\. Open Control Hub and Go to **Calling > Settings** and re-enable **Allow Extension Dialling Between Locations** – We are returning this parameter to the default setting before testing further.  **Click Save**
 ![](assets/docx-image-134.png)
 
 ### Webex Calling Inter Location Dialing
