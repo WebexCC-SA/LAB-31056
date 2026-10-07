@@ -93,6 +93,9 @@ The customer wishes that users are also able to dial back to an on premise UCM u
 
 #### Webex Calling Config
 
+!!! important
+      There are some scripts that you are about to run, they have similar names but do very different things.  Take care to only run the correct ones, as they add configuration and will cost you time to back out if you run the wrong ones.  Check the name twice before running it!
+
 1\. Continuing on workstation1, minimize all applications. Find the PowerShell script named ***LTRCOL2006\_dp\_add\_internal\_trunk.ps1*** . Right click on the file and choose **Run with PowerShell**.
 
 ![](assets/docx-image-055.png)

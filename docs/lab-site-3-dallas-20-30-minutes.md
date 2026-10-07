@@ -109,6 +109,9 @@ Now it will give you PSTN configuration options. Click **Manage** for PSTN Confi
 
 ![](assets/docx-image-197.png)
 
+!!! important
+      There are some scripts that you are about to run, they have similar names but do very different things.  Take care to only run the correct ones, as they add configuration and will cost you time to back out if you run the wrong ones.  Check the name twice before running it!
+
 1\. From the desktop of workstation 1, right click and run the file **LTRCOL2006-CL\_Add\_Trunk.ps1** with powershell. This will create a trunk in control hub for you, and place a configuration file on the desktop  
 
 ![](assets/docx-image-198.png)
