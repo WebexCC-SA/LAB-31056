@@ -4,8 +4,7 @@
 
 2\. Click **Login** at the top right corner and log in with your Cisco.com credentials.
 
-3\. Once logged in, open a new browser tab and paste the **event URL** for your lab. The **event URL** is:
-TO BE CONFIRMED
+3\. Once logged in, [Click this link to assign a pod](https://dcloud2-rtp.cisco.com/event/410876/access)
 
 4\. You will be automatically assigned to a lab pod, and you will be taken to the Lab topology page as shown below.
 
