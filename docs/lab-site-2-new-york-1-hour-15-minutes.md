@@ -62,12 +62,12 @@ For more details refer here <https://help.webex.com/en-us/article/t9xctu/Get-sta
 
 ![](assets/docx-image-050.png)
 
-9\. On the next page populate two 10 digit phone numbers given/allocated to you by your proctor. Click **Save**.
-
-![](assets/docx-image-051.png)
-
 !!! webex
       The phone numbers for your pod should have been sent as a 1:1 message to the Webex Client of Charles Holland.  Check your messages there to find them.  If you have not yet got assigned phone numbers for this module reach out to of the proctors, they will help you.
+
+9\. On the next page populate two 10 digit phone numbers given/allocated to you. Click **Save**.
+
+![](assets/docx-image-051.png)
 
 10\. On the next page click **View numbers,** it will take you to **SERVICES** > **PSTN & Routing** > **Numbers** page, ensure both numbers are added and show the status **Active**.
 
